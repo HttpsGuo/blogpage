@@ -1,0 +1,965 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', sans-serif;
+    line-height: 1.6;
+    background-color: #f0c2a2;
+}
+
+/* 页眉样式 */
+header {
+    background-color: #F9FFD3;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+header h1 {
+    color: #333;
+}
+
+/* 容器样式 */
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 2rem auto;
+    gap: 2rem;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+    flex: 0 0 300px;
+    background-color: #F9FFD3;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    color: #333;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: block;
+    transition: transform 0.8s ease;
+}
+
+.avatar:hover {
+    transform: rotate(360deg);
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+/* 修改联系方式样式 */
+.contact {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    padding: 1rem;
+}
+
+.contact h3 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #1890ff;
+    color: #333;
+}
+
+.email-container {
+    margin-bottom: 1rem;
+}
+
+.email-label {
+    color: #333;
+    margin-right: 0.5rem;
+}
+
+.email {
+    color: #333;
+}
+
+.social-label {
+    color: #333;
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.social-icon:hover {
+    color: #1890ff;
+}
+
+/* 添加邮箱图标样式 */
+.email-label i {
+    font-size: 0.9em;
+    margin: 0 0.2rem;
+    color: #333;
+}
+
+/* 主要内容区样式 */
+.main-content {
+    flex: 1;
+    background-color: #F9FFD3;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    color: #333;
+}
+
+/* 导航栏样式 */
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.main-nav a:hover {
+    color: #1890ff;
+}
+
+/* 文章区域样式 */
+.articles-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    max-width: 100%;
+}
+
+.article-list {
+    min-height: 300px;
+    background: #F9FFD3;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    width: 100%;
+}
+
+.popular-articles, .latest-articles {
+    flex: 1;
+}
+
+.popular-articles h2, .latest-articles h2 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #1890ff;
+    color: #333;
+    font-size: 1.2em;
+}
+
+.article-item {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.article-item:last-child {
+    border-bottom: none;
+}
+
+.article-item a {
+    color: #333;
+    text-decoration: none;
+    flex: 1;
+    min-width: 0;
+    margin-right: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+    max-height: 2.8em;
+    font-size: 0.95em;
+    word-break: break-word;
+}
+
+.article-item a:hover {
+    color: #1890ff;
+}
+
+.article-date {
+    color: #999;
+    font-size: 0.85em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* 修改更多文章按钮样式 */
+.more-articles {
+    display: flex;
+    justify-content: flex-end;
+    margin: 2rem 0;
+}
+
+.more-btn {
+    width: auto;
+    min-width: 120px;
+    margin: 0;
+    padding: 0.8rem 1.5rem;
+    background-color: #1890ff;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.more-btn:hover {
+    background-color: #40a9ff;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
+}
+
+/* 修改友情链接样式 */
+.friend-links {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #F9FFD3;
+    border-radius: 8px;
+}
+
+.section-header {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.section-label {
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+}
+
+.links-container {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    vertical-align: middle;
+}
+
+.friend-link {
+    text-decoration: none;
+}
+
+.link-item {
+    padding: 0.5rem 1rem;
+    background-color: #f0f7c0;
+    border-radius: 4px;
+    color: #333;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.site-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.link-item:hover {
+    background-color: #1890ff;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
+}
+
+/* 隐藏滚动条但保持功能 */
+.links-container::-webkit-scrollbar {
+    height: 4px;
+}
+
+.links-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 2px;
+}
+
+.links-container::-webkit-scrollbar-thumb {
+    background: #1890ff;
+    border-radius: 2px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .container {
+        margin: 2rem 1rem;
+    }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    /* 容器布局调整 */
+    .container {
+        flex-direction: column;
+        margin: 1rem;
+        gap: 1rem;
+    }
+
+    /* 侧边栏调整 */
+    .sidebar {
+        flex: none;
+        width: 100%;
+    }
+
+    /* 主内容区调整 */
+    .main-content {
+        width: 100%;
+    }
+
+    /* 导航栏调整 */
+    .main-nav ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .main-nav a {
+        padding: 0.5rem 1rem;
+    }
+
+    /* 文章区域调整 */
+    .articles-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    /* 时钟调整 */
+    .clock-container {
+        transform: scale(0.6);
+    }
+
+    /* 友情链接调整 */
+    .friend-links {
+        flex-direction: column;
+    }
+
+    .section-header {
+        margin-bottom: 0.5rem;
+    }
+
+    .links-container {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+/* 更小屏幕的适配 */
+@media (max-width: 480px) {
+    /* 头像大小调整 */
+    .avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* 社交图标调整 */
+    .social-icons {
+        gap: 1rem;
+    }
+
+    /* 时钟进一步缩小 */
+    .clock-container {
+        transform: scale(0.5);
+    }
+
+    /* 文章标题字体大小调整 */
+    .article-item a {
+        font-size: 0.9em;
+    }
+
+    /* 新年祝福卡片调整 */
+    .newyear-card {
+        padding: 1rem;
+    }
+
+    .newyear-card table {
+        font-size: 0.9em;
+    }
+}
+
+/* 二维码弹窗样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    color: #666;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+#qrImage {
+    max-width: 200px;
+    height: auto;
+}
+
+/* 修改备案信息和版权信息样式 */
+.footer-info {
+    text-align: center;
+}
+
+.beian, .copyright {
+    margin-bottom: 0.5rem;
+}
+
+.beian a, .copyright a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 0.9em;
+}
+
+.copyright a {
+    font-size: 0.8em;
+}
+
+.beian a:hover, .copyright a:hover {
+    color: #1890ff;
+}
+
+/* 添加新年祝福卡片样式 */
+.newyear-card {
+    background-color: #c6070c;
+    color: #ffe392;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.newyear-card table {
+    margin: auto;
+    width: 100%;
+    max-width: 600px;
+    padding-top: 40px;
+}
+
+.newyear-card .pinyin {
+    height: 20px;
+    font-size: 1.1em;
+    letter-spacing: 3px;
+    font-weight: 400;
+}
+
+.newyear-card td {
+    font-size: 4em;
+    text-align: center;
+    font-weight: 700;
+    padding: 0px;
+}
+
+.newyear-card h2 {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: 700;
+    word-spacing: 5px;
+    color: #ffe392;
+    text-align: center;
+}
+
+.newyear-card button {
+    background-color: #ef941a;
+    color: #fffbe2;
+    width: 200px;
+    position: relative;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+}
+
+.newyear-card button:hover,
+.newyear-card button:focus {
+    background-color: #efa134;
+}
+
+.newyear-card button:active {
+    transform: translate(0px, 2px);
+    -webkit-transform: translate(0px, 2px);
+}
+
+/* 添加时钟卡片样式 */
+.clock-card {
+    background-color: #F9FFD3;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.clock-container {
+    position: relative;
+    min-height: 250px;
+    transform: scale(0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bubble-wrap {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.clock {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: inset 0px 0px 12px 12px rgba(0, 0, 0, 1), 
+                0px 0px 65px 5px rgba(0, 0, 0, 0.5);
+    background: #1a1c1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 110px;
+}
+
+/* 其他时钟相关样式保持不变 */
+.ringbit {
+    position: absolute;
+    width: 150px;
+    height: 350px;
+    border: 20px solid transparent;
+    border-radius: 90px;
+    margin: auto;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    border-bottom: 20px solid white;
+}
+
+.ringbit:before {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 350px;
+    border: 20px solid transparent;
+    border-radius: 90px;
+    margin: auto;
+    left: -15%;
+    bottom: 0;
+    right: 0;
+    top: 5%;
+    border-bottom: 20px solid rgba(0, 0, 0, 0.2);
+    filter: blur(5px);
+    z-index: -1;
+}
+
+.ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 20px solid black;
+    border-radius: 100%;
+    box-sizing: border-box;
+    border-left: 20px solid white;
+    border-right: 20px solid white;
+}
+
+.panel {
+    position: absolute;
+    height: 180px;
+    width: 180px;
+    background-color: black;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 100%;
+}
+
+.string1, .string2, .string3 {
+    position: absolute;
+    width: 3px;
+    height: 180px;
+    border-top: 30px solid black;
+    border-bottom: 30px solid black;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.string1 { transform: rotate(45deg); }
+.string2 { transform: rotate(135deg); }
+.string3 {
+    transform: rotate(0deg);
+    border-bottom: 200px solid black;
+    border-top: 0;
+}
+
+.hour, .minute, .second {
+    position: absolute;
+    background-color: white;
+    margin: auto;
+    left: 0;
+    right: 0;
+    transform-origin: bottom center;
+}
+
+.hour {
+    height: 50px;
+    width: 5px;
+    top: 75px;
+    border-radius: 10px;
+}
+
+.minute {
+    height: 65px;
+    width: 3.5px;
+    top: 60px;
+    border-radius: 10px;
+}
+
+.second {
+    height: 70px;
+    width: 2px;
+    top: 55px;
+    border-radius: 3px;
+}
+
+.pin {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: orange;
+    border: 2px solid white;
+    border-radius: 100%;
+}
+
+.mynum {
+    font-family: "verdana";
+    font-size: 1.2em;
+    color: white;
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.mynum span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    left: 50%;
+    top: 50%;
+    margin: -10px 0 0 -10px;
+}
+
+/* 重新计算每个数字的位置，修正角度起点 */
+.mynum span:nth-child(1) { transform: rotate(-60deg) translate(70px) rotate(60deg); }   /* 1点 */
+.mynum span:nth-child(2) { transform: rotate(-30deg) translate(70px) rotate(30deg); }   /* 2点 */
+.mynum span:nth-child(3) { transform: rotate(0deg) translate(70px) rotate(0deg); }      /* 3点 */
+.mynum span:nth-child(4) { transform: rotate(30deg) translate(70px) rotate(-30deg); }   /* 4点 */
+.mynum span:nth-child(5) { transform: rotate(60deg) translate(70px) rotate(-60deg); }   /* 5点 */
+.mynum span:nth-child(6) { transform: rotate(90deg) translate(70px) rotate(-90deg); }   /* 6点 */
+.mynum span:nth-child(7) { transform: rotate(120deg) translate(70px) rotate(-120deg); } /* 7点 */
+.mynum span:nth-child(8) { transform: rotate(150deg) translate(70px) rotate(-150deg); } /* 8点 */
+.mynum span:nth-child(9) { transform: rotate(180deg) translate(70px) rotate(-180deg); } /* 9点 */
+.mynum span:nth-child(10) { transform: rotate(210deg) translate(70px) rotate(-210deg); } /* 10点 */
+.mynum span:nth-child(11) { transform: rotate(240deg) translate(70px) rotate(-240deg); } /* 11点 */
+.mynum span:nth-child(12) { transform: rotate(-90deg) translate(70px) rotate(90deg); }   /* 12点 */
+
+/* 调整面板样式 */
+.panel:after {
+    content: none;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .clock {
+        transform: scale(0.7);
+    }
+}
+
+/* 添加气泡动画和样式 */
+.bubbles-bg span {
+    display: inline-block;
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: animate 5s linear infinite;
+    animation-duration: calc(150s / var(--i));
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(350px) scale(0);
+        background-color: #df6208;
+        box-shadow: 0px 0px 4px 4px #e67d31, 0 0 30px #e67d31, 0 0 70px #e67d31;
+    }
+    50% {
+        background: #d3df08;
+        box-shadow: 0px 0px 4px 4px #e4ec53, 0 0 30px #e4ec53, 0 0 70px #e4ec53;
+    }
+    70% {
+        background: #df0808;
+        box-shadow: 0px 0px 4px 4px #ec4242, 0 0 30px #ec4242, 0 0 70px #ec4242;
+    }
+    100% {
+        transform: translateY(-10px) scale(1);
+        background-color: #df6208;
+        box-shadow: 0px 0px 4px 4px #e67d31, 0 0 30px #e67d31, 0 0 70px #e67d31;
+    }
+}
+
+/* 时钟中心点样式 */
+.clock::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #df6208;
+    background-color: #2f362f;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/* 内圆样式 */
+.inner-circle {
+    width: 200px;
+    height: 350px;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.inner-circle-2 {
+    width: 150px;
+    height: 250px;
+}
+
+.inner-circle-3 {
+    width: 100px;
+    height: 155px;
+}
+
+/* 边框圆圈样式 */
+.border-circle {
+    border-radius: 50%;
+    position: absolute;
+    background: transparent;
+    border: 2px solid rgba(223, 98, 8, 0.2);
+    left: 50%;
+    top: 50%;
+    width: 180px;
+    height: 180px;
+    transform: translate(-50%, -50%);
+}
+
+.border-circle:nth-child(2) {
+    width: 130px;
+    height: 130px;
+}
+
+.border-circle:nth-child(3) {
+    width: 80px;
+    height: 80px;
+}
+
+/* 指针样式 */
+.inner-circle div {
+    position: relative;
+    height: 50%;
+    width: 7px;
+    border-radius: 5px;
+    display: inline-block;
+    transform-origin: bottom;
+    transform: scale(0.5);
+    z-index: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(223, 98, 8, 0.91) 50%,
+        rgba(255, 0, 0, 0.93) 100%
+    );
+}
+
+.inner-circle-2 div {
+    width: 4px;
+}
+
+.inner-circle-3 div {
+    width: 3px;
+}
+
+/* 数字样式 */
+.clock span {
+    position: absolute;
+    text-align: center;
+    transform: rotate(calc(var(--i) * 29.7deg));
+    inset: 25px;
+}
+
+.clock span b {
+    font-size: 18px;
+    position: absolute;
+    text-align: center;
+    transform: rotateZ(calc(var(--i) * -30deg));
+    display: inline-block;
+    opacity: 0.9;
+    color: #df6208;
+}
+
+/* 数字时钟样式 */
+.digital-time-wrap {
+    width: 10px;
+    height: 80%;
+    background-color: #1a1c1a;
+    position: absolute;
+    left: 48.5%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(-6deg);
+        animation-timing-function: ease-in;
+    }
+    25% {
+        transform: rotate(0deg);
+        animation-timing-function: ease-out;
+    }
+    50% {
+        transform: rotate(6deg);
+        animation-timing-function: ease-in;
+    }
+    75% {
+        transform: rotate(0deg);
+        animation-timing-function: ease-out;
+    }
+    100% {
+        transform: rotate(-6deg);
+    }
+}
+
+#digital-time {
+    width: fit-content;
+    display: flex;
+    padding: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    box-shadow: 0px 0px 65px 5px rgba(0, 0, 0, 0.5);
+    background: #242824;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+}
+
+#digital-time div {
+    font-size: 20px;
+    width: 50px;
+    text-align: center;
+    position: relative;
+    color: #df6208;
+}
+
+#digital-time div:nth-child(1)::after,
+#digital-time div:nth-child(2)::after {
+    content: ':';
+    position: absolute;
+    right: -4px;
+    opacity: 0.7;
+}
+
+#digital-time div:nth-child(4) {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 

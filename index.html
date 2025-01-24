@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 
+    /**
+     * 作者信息
+     * 作者：httpsguo
+     * 网站：https://www.httpsguo.cn
+     * 博客：https://blog.httpsguo.cn
+     * 邮箱：httpsguo@163.com
+     * Telegram：https://t.me/httpsguo
+     * Github：[待添加]
+     * 
+     * 特别感谢
+     * 感谢"前端嘛"(https://www.fecoder.cn/)提供的代码支持
+     * 
+     * 开源说明
+     * 本项目开源，欢迎使用和改进，使用时请保留作者信息
+     * 最后更新：2024-01-25
+     */
+    -->
+    
+    <!-- SEO 相关标签 -->
+    <title>郭先生的Blog - 个人生活学习记录分享</title>
+    <meta name="description" content="郭先生的个人网站，分享个人生活学习记录">
+    <meta name="keywords" content="人工智能,网络分享,AI编程,资源分享,迅雷邀请码分享">
+    <meta name="author" content="郭先生">
+    
+    <!-- Open Graph 标签，用于社交媒体分享 -->
+    <meta property="og:title" content="郭先生的Blog">
+    <meta property="og:description" content="郭先生的个人网站，分享个人生活学习记录">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blog.httpsguo.cn">
+    
+    <!-- 其他现有标签 -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入字体图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/brands.min.css">
+    <script src="script.js" defer></script>
+
+    <!-- 统计代码位置1：这里放置需要优先加载的统计代码，如百度统计、Google Analytics等 -->
+
+    <!-- DNS预解析 -->
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//blog.httpsguo.cn">
+    
+    <!-- 预连接 -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- 资源提示 -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+</head>
+<body>
+    <!-- 页眉 -->
+    <header>
+        <h1>HttpsGuo-郭先生的Blog</h1>
+    </header>
+
+    <!-- 主要内容区 -->
+    <div class="container">
+        <!-- 左侧边栏 -->
+        <aside class="sidebar">
+            <!-- 头像区域 -->
+            <div class="profile">
+                <img src="http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png" alt="头像" class="avatar" loading="lazy" width="150" height="150">
+                <p class="intro">这里是郭先生的blog</p>
+            </div>
+
+            <!-- 联系方式 -->
+            <div class="contact">
+                <h3>联系方式</h3>
+                <div class="email-container">
+                    <span class="email-label">邮箱<i class="fas fa-envelope"></i>：</span>
+                    <span class="email">httpsguo@163.com</span>
+                </div>
+                <span class="social-label">社交媒体</span>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" data-type="wechat" data-qr="http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="#" class="social-icon" data-type="qq" data-qr="http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png">
+                        <i class="fab fa-qq"></i>
+                    </a>
+                    <a href="#" class="social-icon" data-type="douyin" data-qr="http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://t.me/httpsguo" class="social-icon" data-type="telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 添加时钟卡片 -->
+            <div class="clock-card">
+                <div class="clock-container">
+                <div class="clock">
+                        <div class="bubble-wrap">
+                            <div class="bubbles-bg">
+                                <span style="--i: 15"></span>
+                                <span style="--i: 12"></span>
+                                <span style="--i: 18"></span>
+                                <span style="--i: 22"></span>
+                                <span style="--i: 20"></span>
+                                <span style="--i: 23"></span>
+                                <span style="--i: 13"></span>
+                                <span style="--i: 18"></span>
+                                <span style="--i: 28"></span>
+                                <span style="--i: 24"></span>
+                                <span style="--i: 15"></span>
+                                <span style="--i: 21"></span>
+                            </div>
+                        </div>
+                        <!-- 边框圆圈 -->
+                        <div class="border-circle"></div>
+                        <div class="border-circle"></div>
+                        <div class="border-circle"></div>
+
+                        <!-- 时钟指针 -->
+                        <div class="inner-circle inner-circle-1" id="sec">
+                            <div></div>
+                        </div>
+                        <div class="inner-circle inner-circle-2" id="min">
+                            <div></div>
+                        </div>
+                        <div class="inner-circle inner-circle-3" id="hrs">
+                            <div></div>
+                        </div>
+
+                        <!-- 时钟数字 -->
+                        <span style="--i: 1"><b>1</b></span>
+                        <span style="--i: 2"><b>2</b></span>
+                        <span style="--i: 3"><b>3</b></span>
+                        <span style="--i: 4"><b>4</b></span>
+                        <span style="--i: 5"><b>5</b></span>
+                        <span style="--i: 6"><b>6</b></span>
+                        <span style="--i: 7"><b>7</b></span>
+                        <span style="--i: 8"><b>8</b></span>
+                        <span style="--i: 9"><b>9</b></span>
+                        <span style="--i: 10"><b>10</b></span>
+                        <span style="--i: 11"><b>11</b></span>
+                        <span style="--i: 12"><b>12</b></span>
+
+                        <!-- 数字时钟 -->
+                        <div class="digital-time-wrap">
+                            <div id="digital-time">
+                                <div id="hours">00</div>
+                                <div id="minuts">00</div>
+                                <div id="seconds">00</div>
+                                <div id="ampm">PM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 备案信息 -->
+            <div class="footer-info">
+                <p class="beian">
+                    <a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2024061265-1号</a>
+                </p>
+                <p class="copyright">
+                    <a href="https://www.httpsguo.cn" target="_blank">© 2024 HttpsGuo. All rights reserved.</a>
+                </p>
+            </div>
+        </aside>
+
+        <!-- 右侧主要内容 -->
+        <main class="main-content">
+            <!-- 导航栏 -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="https://www.httpsguo.cn" target="_blank">首页</a></li>
+                    <li><a href="https://blog.httpsguo.cn" target="_blank">博客</a></li>
+                    <li><a href="https://nav.httpsguo.cn" target="_blank">导航</a></li>
+                    <li><a href="https://tool.httpsguo.cn" target="_blank">工具</a></li>
+                    <li><a href="https://blog.httpsguo.cn/abouthttpsguo" target="_blank">关于</a></li>
+                </ul>
+            </nav>
+
+            <!-- 卡片栏目 -->
+            <div class="card-section">
+                <div class="newyear-card">
+                    <table>
+                        <tr>
+                            <th class="pinyin" id="pinyin1">xīn</th>
+                            <th class="pinyin" id="pinyin2">nián</th>
+                            <th class="pinyin" id="pinyin3">kuài</th>
+                            <th class="pinyin" id="pinyin4">lè</th>
+                        </tr>
+                        <tr>
+                            <td id="phraseChinese1">新</td>
+                            <td id="phraseChinese2">年</td>
+                            <td id="phraseChinese3">快</td>
+                            <td id="phraseChinese4">樂</td>
+                        </tr>
+                    </table>
+                    <h2 id="phraseEnglish">(Happy new year)</h2>
+                    <button type="button" id="button"><p>换一个</p></button>
+                </div>
+            </div>
+
+            <!-- 文章区域 -->
+            <div class="articles-container">
+                <!-- 热门文章 -->
+                <div class="popular-articles">
+                    <h2>热门文章</h2>
+                    <div class="article-list">
+                        <!-- 文章列表将通过 JS 动态加载 -->
+                    </div>
+                </div>
+
+                <!-- 最新文章 -->
+                <div class="latest-articles">
+                    <h2>最新文章</h2>
+                    <div class="article-list">
+                        <!-- 文章列表将通过 JS 动态加载 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 更多文章按钮 -->
+            <div class="more-articles">
+                <a href="https://blog.httpsguo.cn" class="more-btn">更多文章</a>
+            </div>
+
+            <!-- 友情链接 -->
+            <div class="friend-links">
+                <div class="section-header">
+                    <span class="section-label">友情链接：</span>
+                </div>
+                <div class="links-container">
+                    <a href="https://chongbuluo.com" class="friend-link" target="_blank">
+                        <div class="link-item">
+                            <!-- 虫部落网站图标位置：
+                                 1. 图片大小建议：16x16px
+                                 2. 格式：PNG或ICO
+                                 3. 替换下方注释为实际图标
+                            -->
+                            <!-- <img src="网站图标地址" alt="虫部落" class="site-icon"> -->
+                            <span>虫部落</span>
+                        </div>
+                    </a>
+                    <a href="https://linux.do" class="friend-link" target="_blank">
+                        <div class="link-item">
+                            <!-- LINUX DO网站图标位置：
+                                 1. 图片大小建议：16x16px
+                                 2. 格式：PNG或ICO
+                                 3. 替换下方注释为实际图标
+                            -->
+                            <!-- <img src="网站图标地址" alt="LINUX DO" class="site-icon"> -->
+                            <span>LINUX DO</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 二维码弹窗 -->
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="qrImage" src="" alt="二维码">
+        </div>
+    </div>
+
+    <!-- 统计代码位置2 -->
+    <script src="script.js" defer></script>
+</body>
+</html> 

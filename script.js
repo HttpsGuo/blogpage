@@ -1,0 +1,190 @@
+// RSS Feed 解析和文章加载
+async function loadArticles() {
+    try {
+        // 获取最新文章
+        const response = await fetch('https://blog.httpsguo.cn/wp-json/wp/v2/posts?per_page=5&_embed');
+        const articles = await response.json();
+
+        // 填充最新文章
+        const latestList = document.querySelector('.latest-articles .article-list');
+        articles.forEach(article => {
+            const articleElement = createArticleElement({
+                title: article.title.rendered,
+                link: article.link,
+                date: new Date(article.date)
+            });
+            latestList.appendChild(articleElement);
+        });
+
+        // 热门文章数据（手动设置）
+        const popularArticles = [
+            {
+                title: "最新迅雷NAS版邀请码分享（长期分享，每月5枚）",
+                link: "https://blog.httpsguo.cn/120.html",
+                date: new Date("2024-12-16")
+            },
+            {
+                title: "《2025年未来就业报告》：技术变革与技能升级重塑全球劳动力市场",
+                link: "https://blog.httpsguo.cn/227.html",
+                date: new Date("2025-01-22")
+            },
+            {
+                title: "WPS单位定制版永久激活附下载地址",
+                link: "https://blog.httpsguo.cn/108.html",
+                date: new Date("2024-12-04")
+            },
+            {
+                title: "强烈推荐一个可以下载中文教科书的网站",
+                link: "https://blog.httpsguo.cn/71.html",
+                date: new Date("2024-11-08")
+            },
+            {
+                title: "在宝塔面板搭建一个漂亮的个人导航网页-SunPanel",
+                link: "https://blog.httpsguo.cn/35.html",
+                date: new Date("2024-10-24")
+            }
+        ];
+
+        // 填充热门文章
+        const popularList = document.querySelector('.popular-articles .article-list');
+        popularArticles.forEach(article => {
+            const articleElement = createArticleElement(article);
+            popularList.appendChild(articleElement);
+        });
+    } catch (error) {
+        console.error('加载文章失败:', error);
+    }
+}
+
+function createArticleElement(article) {
+    const div = document.createElement('div');
+    div.className = 'article-item';
+    
+    // 解码 HTML 实体
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = article.title;
+    const decodedTitle = tempDiv.textContent;
+
+    div.innerHTML = `
+        <a href="${article.link}" target="_blank">${decodedTitle}</a>
+        <span class="article-date">${article.date.toLocaleDateString('zh-CN')}</span>
+    `;
+    return div;
+}
+
+// 社交媒体图标点击处理
+document.querySelectorAll('.social-icon').forEach(icon => {
+    icon.addEventListener('click', function(e) {
+        e.preventDefault();
+        const type = this.dataset.type;
+        
+        if (type === 'telegram') {
+            window.open('https://t.me/httpsguo');
+            return;
+        }
+        
+        const qrUrl = this.dataset.qr;
+        if (qrUrl) {
+            const modal = document.getElementById('qrModal');
+            const qrImage = document.getElementById('qrImage');
+            qrImage.src = qrUrl;
+            modal.style.display = 'block';
+        }
+    });
+});
+
+// 关闭二维码弹窗
+document.querySelector('.close').addEventListener('click', function() {
+    document.getElementById('qrModal').style.display = 'none';
+});
+
+// 点击弹窗外部关闭
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('qrModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+// 添加新年祝福生成器代码
+const p1 = ['xīn', 'gōng', 'dà', 'wàn', 'nián', 'shēn', 'xīn', 'gōng'];
+const p2 = ['nián', 'xǐ', 'jí', 'shì', 'nián', 'tǐ', 'xiǎng', 'hè'];
+const p3 = ['kuài', 'fā', 'dà', 'rú', 'yǒu', 'jiàn', 'shì', 'xīn'];
+const p4 = ['lè', 'cái', 'lì', 'yì', 'yú', 'kāng', 'chéng', 'xǐ'];
+const phrasesC1 = ['新', '恭', '大', '萬', '年', '身', '心', '恭'];
+const phrasesC2 = ['年', '喜', '吉', '事', '年', '體', '想', '賀'];
+const phrasesC3 = ['快', '發', '大', '如', '有', '健', '事', '新'];
+const phrasesC4 = ['樂', '財', '利', '意', '餘', '康', '成', '禧'];
+const phrasesE = [
+    '(Happy new year)',
+    '(Congratulations on your prosperity)',
+    '(Great luck and prosperity)',
+    '(May 10,000 things go according to your wishes)',
+    '(Every year have more than you need)',
+    '(Wishing you good health)',
+    "(May all your heart's desires come true)",
+    '(Congratulations in the new year)',
+];
+
+function updatePhrase() {
+    const random = Math.random();
+    const index = Math.floor(random * p1.length);
+    
+    document.getElementById('pinyin1').textContent = p1[index];
+    document.getElementById('pinyin2').textContent = p2[index];
+    document.getElementById('pinyin3').textContent = p3[index];
+    document.getElementById('pinyin4').textContent = p4[index];
+    
+    document.getElementById('phraseChinese1').textContent = phrasesC1[index];
+    document.getElementById('phraseChinese2').textContent = phrasesC2[index];
+    document.getElementById('phraseChinese3').textContent = phrasesC3[index];
+    document.getElementById('phraseChinese4').textContent = phrasesC4[index];
+    
+    document.getElementById('phraseEnglish').textContent = phrasesE[index];
+}
+
+// 初始化新年祝福
+document.addEventListener('DOMContentLoaded', () => {
+    updatePhrase();
+    document.getElementById('button').addEventListener('click', updatePhrase);
+});
+
+// 页面加载完成后执行
+document.addEventListener('DOMContentLoaded', loadArticles);
+
+// 替换原有时钟函数
+let hrs = document.querySelector('#hrs');
+let sec = document.querySelector('#sec');
+let min = document.querySelector('#min');
+
+setInterval(() => {
+    let day = new Date();
+    let hh = day.getHours() * 30;
+    let mm = day.getMinutes() * 6;
+    let ss = day.getSeconds() * 6;
+
+    hrs.style.transform = `rotateZ(${hh + mm / 12}deg)`;
+    min.style.transform = `rotateZ(${mm}deg)`;
+    sec.style.transform = `rotateZ(${ss}deg)`;
+});
+
+// 数字时钟
+function updateClock() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+
+    document.getElementById('hours').textContent = formatTime(hours % 12 || 12);
+    document.getElementById('minuts').textContent = formatTime(minutes);
+    document.getElementById('seconds').textContent = formatTime(seconds);
+    document.getElementById('ampm').textContent = ampm;
+}
+
+function formatTime(time) {
+    return time < 10 ? '0' + time : time;
+}
+
+setInterval(updateClock, 1000);
+updateClock();

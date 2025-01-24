@@ -44,6 +44,15 @@
     <script src="script.js" defer></script>
 
     <!-- 统计代码位置1：这里放置需要优先加载的统计代码，如百度统计、Google Analytics等 -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?f42ee996dda2fddb04c1f9c560d395ca";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
 
     <!-- DNS预解析 -->
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
@@ -55,6 +64,31 @@
     <!-- 资源提示 -->
     <link rel="preload" href="style.css" as="style">
     <link rel="preload" href="script.js" as="script">
+
+    <!-- 添加网站图标 -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- 添加关键 CSS -->
+    <style>
+      /* 关键渲染路径 CSS */
+      .main-nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        justify-content: space-between;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+      @media (max-width: 768px) {
+        .nav-links {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
 </head>
 <body>
     <!-- 页眉 -->
@@ -80,18 +114,21 @@
                     <span class="email">httpsguo@163.com</span>
                 </div>
                 <span class="social-label">社交媒体</span>
-                <div class="social-icons">
-                    <a href="#" class="social-icon" data-type="wechat" data-qr="http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png">
-                        <i class="fab fa-weixin"></i>
+                <div class="social-icons" role="group" aria-label="社交媒体链接">
+                    <a href="#" class="social-icon" data-type="wechat" aria-label="微信二维码" title="微信">
+                        <i class="fab fa-weixin" aria-hidden="true"></i>
                     </a>
-                    <a href="#" class="social-icon" data-type="qq" data-qr="http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png">
+                    <a href="#" class="social-icon" data-type="qq" data-qr="http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png" title="QQ">
                         <i class="fab fa-qq"></i>
                     </a>
-                    <a href="#" class="social-icon" data-type="douyin" data-qr="http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png">
+                    <a href="#" class="social-icon" data-type="douyin" data-qr="http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png" title="抖音">
                         <i class="fab fa-tiktok"></i>
                     </a>
-                    <a href="https://t.me/httpsguo" class="social-icon" data-type="telegram">
+                    <a href="https://t.me/httpsguo" class="social-icon" data-type="telegram" title="Telegram">
                         <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://github.com/HttpsGuo" class="social-icon" data-type="github" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
                     </a>
                 </div>
             </div>
@@ -173,13 +210,20 @@
         <!-- 右侧主要内容 -->
         <main class="main-content">
             <!-- 导航栏 -->
-            <nav class="main-nav">
+            <nav class="main-nav" role="navigation" aria-label="主导航">
                 <ul>
-                    <li><a href="https://www.httpsguo.cn" target="_blank">首页</a></li>
-                    <li><a href="https://blog.httpsguo.cn" target="_blank">博客</a></li>
-                    <li><a href="https://nav.httpsguo.cn" target="_blank">导航</a></li>
-                    <li><a href="https://tool.httpsguo.cn" target="_blank">工具</a></li>
-                    <li><a href="https://blog.httpsguo.cn/abouthttpsguo" target="_blank">关于</a></li>
+                    <div class="nav-links">
+                        <li><a href="https://www.httpsguo.cn" target="_blank" aria-label="首页">首页</a></li>
+                        <li><a href="https://blog.httpsguo.cn" target="_blank">博客</a></li>
+                        <li><a href="https://nav.httpsguo.cn" target="_blank">导航</a></li>
+                        <li><a href="https://tool.httpsguo.cn" target="_blank">工具</a></li>
+                        <li><a href="https://blog.httpsguo.cn/abouthttpsguo" target="_blank">关于</a></li>
+                    </div>
+                    <div class="theme-toggle-container">
+                            <button id="theme-toggle" class="theme-toggle" aria-label="切换深色模式">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                    </div>
                 </ul>
             </nav>
 
@@ -206,12 +250,11 @@
             </div>
 
             <!-- 文章区域 -->
-            <div class="articles-container">
-                <!-- 热门文章 -->
+            <div class="articles-container" role="region" aria-label="文章列表">
                 <div class="popular-articles">
-                    <h2>热门文章</h2>
-                    <div class="article-list">
-                        <!-- 文章列表将通过 JS 动态加载 -->
+                    <h2 id="popular-title">热门文章</h2>
+                    <div class="article-list" role="list" aria-labelledby="popular-title">
+                        <!-- 文章列表项 -->
                     </div>
                 </div>
 
@@ -271,6 +314,6 @@
     </div>
 
     <!-- 统计代码位置2 -->
-    <script src="script.js" defer></script>
+    <script src="/script.js" defer></script>
 </body>
 </html> 

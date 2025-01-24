@@ -1,20 +1,43 @@
+'use strict';
+
+// 防止 XSS 的辅助函数
+function sanitizeHTML(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
 // RSS Feed 解析和文章加载
 async function loadArticles() {
     try {
-        // 获取最新文章
-        const response = await fetch('https://blog.httpsguo.cn/wp-json/wp/v2/posts?per_page=5&_embed');
-        const articles = await response.json();
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5秒超时
 
-        // 填充最新文章
+        const response = await fetch('https://blog.httpsguo.cn/wp-json/wp/v2/posts?per_page=5&_embed', {
+            signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const articles = await response.json();
+        
+        // 使用 DocumentFragment 优化 DOM 操作
         const latestList = document.querySelector('.latest-articles .article-list');
+        const fragment = document.createDocumentFragment();
+        
         articles.forEach(article => {
             const articleElement = createArticleElement({
-                title: article.title.rendered,
+                title: sanitizeHTML(article.title.rendered),
                 link: article.link,
                 date: new Date(article.date)
             });
-            latestList.appendChild(articleElement);
+            fragment.appendChild(articleElement);
         });
+        
+        latestList.appendChild(fragment);
 
         // 热门文章数据（手动设置）
         const popularArticles = [
@@ -53,6 +76,8 @@ async function loadArticles() {
         });
     } catch (error) {
         console.error('加载文章失败:', error);
+        // 显示友好的错误信息
+        showErrorMessage('文章加载失败，请稍后重试');
     }
 }
 
@@ -188,3 +213,42 @@ function formatTime(time) {
 
 setInterval(updateClock, 1000);
 updateClock();
+
+// 错误提示函数
+function showErrorMessage(message) {
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    document.querySelector('.latest-articles .article-list').appendChild(errorDiv);
+}
+
+// 主题切换功能
+function initTheme() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    
+    // 获取保存的主题
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+    
+    // 设置正确的图标
+    const icon = themeToggle.querySelector('i');
+    icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    
+    // 添加点击事件
+    themeToggle.onclick = function() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    };
+}
+
+// 确保在页面加载完成后初始化主题
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTheme);
+} else {
+    initTheme();
+}

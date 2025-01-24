@@ -1,0 +1,22 @@
+# 设置正确的 MIME 类型
+AddType text/css .css
+AddType text/javascript .js
+AddType image/x-icon .ico
+
+# 启用 CORS
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+# 启用 gzip 压缩
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript text/javascript
+</IfModule>
+
+# 设置缓存
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+</IfModule> 

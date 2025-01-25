@@ -89,6 +89,20 @@
         }
       }
     </style>
+
+    <!-- 在 head 标签内添加 GSAP 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    
+    <!-- 添加 SVG 过滤器 -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+                <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+        </defs>
+    </svg>
 </head>
 <body>
     <!-- 页眉 -->
@@ -108,28 +122,44 @@
 
             <!-- 联系方式 -->
             <div class="contact">
-                <h3>联系方式</h3>
-                <div class="email-container">
-                    <span class="email-label">邮箱<i class="fas fa-envelope"></i>：</span>
-                    <span class="email">httpsguo@163.com</span>
+                <div id="contactWrapper">
+                    <div id="contactInfo" class="contact-info"></div>
+                    <div class="contact-list">
+                        <div class="contact-item" onclick="handleContact('1')">
+                            <span class="contact-text">微信</span>
+                            <i class="contact-icon fab fa-weixin"></i>
+                            <div class="menu-tooltip">扫码添加微信</div>
+                        </div>
+                        <div class="contact-item" onclick="handleContact('2')">
+                            <span class="contact-text">QQ</span>
+                            <i class="contact-icon fab fa-qq"></i>
+                            <div class="menu-tooltip">扫码添加QQ</div>
+                        </div>
+                        <div class="contact-item" onclick="handleContact('3')">
+                            <span class="contact-text">抖音</span>
+                            <i class="contact-icon fab fa-tiktok"></i>
+                            <div class="menu-tooltip">扫码关注抖音</div>
+                        </div>
+                        <div class="contact-item" onclick="handleContact('4')">
+                            <span class="contact-text">邮箱</span>
+                            <i class="contact-icon fas fa-envelope"></i>
+                            <div class="menu-tooltip">httpsguo@163.com</div>
+                        </div>
+                        <div class="contact-item" onclick="handleContact('5')">
+                            <span class="contact-text">Telegram</span>
+                            <i class="contact-icon fab fa-telegram"></i>
+                            <div class="menu-tooltip">@httpsguo</div>
+                        </div>
+                        <div class="contact-item" onclick="handleContact('6')">
+                            <span class="contact-text">GitHub</span>
+                            <i class="contact-icon fab fa-github"></i>
+                            <div class="menu-tooltip">@HttpsGuo</div>
+                        </div>
+                    </div>
                 </div>
-                <span class="social-label">社交媒体</span>
-                <div class="social-icons" role="group" aria-label="社交媒体链接">
-                    <a href="#" class="social-icon" data-type="wechat" aria-label="微信二维码" title="微信">
-                        <i class="fab fa-weixin" aria-hidden="true"></i>
-                    </a>
-                    <a href="#" class="social-icon" data-type="qq" data-qr="http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png" title="QQ">
-                        <i class="fab fa-qq"></i>
-                    </a>
-                    <a href="#" class="social-icon" data-type="douyin" data-qr="http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png" title="抖音">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="https://t.me/httpsguo" class="social-icon" data-type="telegram" title="Telegram">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="https://github.com/HttpsGuo" class="social-icon" data-type="github" target="_blank" title="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
+                <div id="bgWrapper">
+                    <div id="bg"></div>
+                    <div id="bgBubble"></div>
                 </div>
             </div>
 

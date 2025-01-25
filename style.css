@@ -84,173 +84,116 @@ header h1 {
     margin-bottom: 1.5rem;
     text-align: left;
     padding: 1rem;
-}
-
-.contact h3 {
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--link-color);
-    color: var(--text-color);
-}
-
-.email-container {
-    margin-bottom: 1rem;
-}
-
-.email-label {
-    color: var(--text-color);
-    margin-right: 0.5rem;
-}
-
-.email {
-    color: var(--text-color);
-}
-
-.social-label {
-    color: var(--text-color);
-    margin-bottom: 0.8rem;
-    display: block;
-}
-
-.social-icons {
-    display: flex;
-    justify-content: flex-start;
-    gap: 1.5rem;
-    margin-top: 0.5rem;
-}
-
-.social-icon {
-    font-size: 1.5rem;
-    color: var(--text-color);
-    transition: color 0.3s;
     position: relative;
 }
 
-.social-icon:hover {
-    color: var(--link-color);
-}
-
-/* 添加邮箱图标样式 */
-.email-label i {
-    font-size: 0.9em;
-    margin: 0 0.2rem;
-    color: var(--text-color);
-}
-
-/* 主要内容区样式 */
-.main-content {
-    flex: 1;
+#contactWrapper {
+    position: relative;
+    width: 100%;
     background-color: var(--card-bg);
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    color: var(--text-color);
-}
-
-/* 导航栏样式 */
-.main-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    justify-content: space-between;
-}
-
-.main-nav a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.main-nav a:hover {
-    color: var(--link-color);
-}
-
-/* 添加导航链接容器 */
-.nav-links {
-    display: flex;
-    gap: 2rem;
-}
-
-/* 调整主题切换按钮容器样式 */
-.theme-toggle-container {
-    display: flex;
-    align-items: center;
-}
-
-/* 文章区域样式 */
-.articles-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    max-width: 100%;
-}
-
-.article-list {
-    min-height: 300px;
-    background: var(--card-bg);
+    border-radius: 10px;
     padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* 添加联系信息显示区域样式 */
+.contact-info {
+    text-align: center;
+    margin-bottom: 1rem;
+    min-height: 24px;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.contact-info.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 修改联系方式列表样式 */
+.contact-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
     width: 100%;
 }
 
-.popular-articles, .latest-articles {
-    flex: 1;
-}
-
-.popular-articles h2, .latest-articles h2 {
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--link-color);
-    color: var(--text-color);
-    font-size: 1.2em;
-}
-
-.article-item {
-    padding: 0.8rem 0;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+.contact-item {
+    position: relative;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background: var(--card-bg);
+    transition: all 0.3s ease;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center; /* 居中对齐 */
     gap: 0.5rem;
-    animation: fadeIn 0.5s ease-out forwards;
-    opacity: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%; /* 确保宽度一致 */
 }
 
-.article-item:last-child {
-    border-bottom: none;
-}
-
-.article-item a {
+/* 调整文字样式 */
+.contact-text {
     color: var(--text-color);
-    text-decoration: none;
-    flex: 1;
-    min-width: 0;
-    margin-right: 1rem;
+    font-size: 0.9rem;
+    white-space: nowrap; /* 防止文字换行 */
     overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    line-height: 1.4;
-    max-height: 2.8em;
-    font-size: 0.95em;
-    word-break: break-word;
+    text-overflow: ellipsis; /* 超出显示省略号 */
 }
 
-.article-item a:hover {
-    color: var(--link-color);
+.contact-icon {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
 }
 
-.article-date {
-    color: #999;
-    font-size: 0.85em;
+.contact-item:hover {
+    background: var(--bg-color);
+}
+
+.contact-item:hover .contact-icon {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.contact-item:hover .menu-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -10px);
+}
+
+/* 修改提示框样式 */
+.menu-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
     white-space: nowrap;
-    flex-shrink: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 10;
+    margin-bottom: 0.5rem;
+}
+
+.menu-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.8);
 }
 
 /* 修改更多文章按钮样式 */
@@ -414,6 +357,11 @@ header h1 {
         width: 100%;
         justify-content: flex-start;
     }
+
+    /* 联系方式列表调整 */
+    .contact-list {
+        grid-template-columns: repeat(2, 1fr); /* 小屏幕时改为两列 */
+    }
 }
 
 /* 更小屏幕的适配 */
@@ -447,46 +395,47 @@ header h1 {
     .newyear-card table {
         font-size: 0.9em;
     }
+
+    /* 联系方式列表调整 */
+    .contact-list {
+        grid-template-columns: 1fr; /* 更小屏幕时改为单列 */
+    }
 }
 
-/* 二维码弹窗样式 */
-.modal {
+/* 修改二维码模态框样式 */
+.qr-modal {
     display: none;
     position: fixed;
-    z-index: 1000;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.7);
-}
-
-.modal-content {
-    position: relative;
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-    text-align: center;
-}
-
-.close {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    color: #666;
-    font-size: 24px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 
-.close:hover {
-    color: #000;
+.qr-content {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    max-width: 90%;
+    text-align: center;
+    cursor: default;
 }
 
-#qrImage {
+.qr-content h3 {
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.qr-content img {
     max-width: 200px;
     height: auto;
+    border-radius: 4px;
 }
 
 /* 修改备案信息和版权信息样式 */
@@ -1069,4 +1018,157 @@ html {
 
 .theme-toggle:hover {
     color: var(--link-color);
+}
+
+/* 添加邮箱提示样式 */
+.email-tooltip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 1000;
+    animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { opacity: 0; }
+} 
+
+/* 主要内容区样式 */
+.main-content {
+    flex: 1;
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    color: var(--text-color);
+}
+
+/* 导航栏样式 */
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.main-nav a:hover {
+    color: var(--link-color);
+}
+
+/* 添加导航链接容器 */
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+/* 调整主题切换按钮容器样式 */
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+}
+
+/* 文章区域样式 */
+.articles-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    max-width: 100%;
+}
+
+.article-list {
+    min-height: 300px;
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    width: 100%;
+}
+
+.popular-articles, .latest-articles {
+    flex: 1;
+}
+
+.popular-articles h2, .latest-articles h2 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--link-color);
+    color: var(--text-color);
+    font-size: 1.2em;
+}
+
+.article-item {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    animation: fadeIn 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.article-item:last-child {
+    border-bottom: none;
+}
+
+.article-item a {
+    color: var(--text-color);
+    text-decoration: none;
+    flex: 1;
+    min-width: 0;
+    margin-right: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+    max-height: 2.8em;
+    font-size: 0.95em;
+    word-break: break-word;
+}
+
+.article-item a:hover {
+    color: var(--link-color);
+}
+
+.article-date {
+    color: #999;
+    font-size: 0.85em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .articles-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .article-item {
+        flex-direction: column;
+    }
+    
+    .article-date {
+        align-self: flex-end;
+    }
 } 

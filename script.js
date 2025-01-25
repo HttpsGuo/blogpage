@@ -97,23 +97,28 @@ function createArticleElement(article) {
     return div;
 }
 
-// 社交媒体图标点击处理
+// 修改社交媒体图标点击处理
 document.querySelectorAll('.social-icon').forEach(icon => {
     icon.addEventListener('click', function(e) {
-        e.preventDefault();
         const type = this.dataset.type;
         
-        if (type === 'telegram') {
-            window.open('https://t.me/httpsguo');
+        // 对于 telegram 和 github，在新窗口打开
+        if (type === 'telegram' || type === 'github') {
+            e.preventDefault(); // 阻止默认行为
+            window.open(this.href, '_blank'); // 在新窗口打开链接
             return;
         }
         
-        const qrUrl = this.dataset.qr;
-        if (qrUrl) {
-            const modal = document.getElementById('qrModal');
-            const qrImage = document.getElementById('qrImage');
-            qrImage.src = qrUrl;
-            modal.style.display = 'block';
+        // 对于需要显示二维码的图标
+        e.preventDefault();
+        if (type === 'wechat' || type === 'qq' || type === 'douyin') {
+            const qrUrl = this.dataset.qr;
+            if (qrUrl) {
+                const modal = document.getElementById('qrModal');
+                const qrImage = document.getElementById('qrImage');
+                qrImage.src = qrUrl;
+                modal.style.display = 'block';
+            }
         }
     });
 });
@@ -252,3 +257,87 @@ if (document.readyState === 'loading') {
 } else {
     initTheme();
 }
+
+// 修改联系信息显示函数
+function showContactInfo(text) {
+    const infoDiv = document.getElementById('contactInfo');
+    infoDiv.textContent = text;
+    infoDiv.classList.add('show');
+    
+    // 3秒后隐藏信息
+    setTimeout(() => {
+        infoDiv.classList.remove('show');
+    }, 3000);
+}
+
+// 修改处理联系方式点击函数
+function handleContact(id) {
+    switch(id) {
+        case '1': // 微信
+            showContactInfo('微信二维码');
+            showQRCode('http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png', '微信二维码');
+            break;
+        case '2': // QQ
+            showContactInfo('QQ二维码');
+            showQRCode('http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png', 'QQ二维码');
+            break;
+        case '3': // 抖音
+            showContactInfo('抖音二维码');
+            showQRCode('http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png', '抖音二维码');
+            break;
+        case '4': // 邮箱
+            showContactInfo('邮箱：httpsguo@163.com');
+            break;
+        case '5': // Telegram
+            showContactInfo('正在跳转到 Telegram...');
+        window.open('https://t.me/httpsguo', '_blank');
+            break;
+        case '6': // GitHub
+            showContactInfo('正在跳转到 GitHub...');
+        window.open('https://github.com/HttpsGuo', '_blank');
+            break;
+    }
+}
+
+// 修改二维码显示函数
+function showQRCode(qrUrl, title) {
+    // 移除已存在的二维码模态框
+    const existingModal = document.querySelector('.qr-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    const modal = document.createElement('div');
+    modal.className = 'qr-modal';
+    
+    modal.innerHTML = `
+        <div class="qr-content">
+            <h3>${title}</h3>
+            <img src="${qrUrl}" alt="${title}">
+        </div>
+    `;
+    
+    // 将模态框添加到 body
+    document.body.appendChild(modal);
+    
+    // 显示模态框
+    requestAnimationFrame(() => {
+        modal.style.display = 'flex';
+    });
+    
+    // 点击背景关闭
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+        modal.style.display = 'none';
+        setTimeout(() => modal.remove(), 300);
+        }
+    });
+}
+
+// 初始化联系方式
+document.addEventListener('DOMContentLoaded', () => {
+    // 显示所有图标
+    document.querySelectorAll('.bubble .icon').forEach(icon => {
+        icon.style.opacity = '0.7';
+    });
+});

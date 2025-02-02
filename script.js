@@ -10,6 +10,12 @@ function sanitizeHTML(str) {
 // RSS Feed 解析和文章加载
 async function loadArticles() {
     try {
+        const latestList = document.querySelector('.latest-articles .article-list');
+        const spinner = document.createElement('div');
+        spinner.className = 'loading';
+        spinner.textContent = '加载中...';
+        latestList.appendChild(spinner);
+
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000); // 5秒超时
 
@@ -24,10 +30,11 @@ async function loadArticles() {
 
         const articles = await response.json();
         
-        // 使用 DocumentFragment 优化 DOM 操作
-        const latestList = document.querySelector('.latest-articles .article-list');
-        const fragment = document.createDocumentFragment();
+        // 移除加载动画
+        latestList.innerHTML = '';
         
+        // 使用 DocumentFragment 优化 DOM 操作
+        const fragment = document.createDocumentFragment();
         articles.forEach(article => {
             const articleElement = createArticleElement({
                 title: sanitizeHTML(article.title.rendered),
@@ -98,28 +105,13 @@ function createArticleElement(article) {
 }
 
 // 修改社交媒体图标点击处理
-document.querySelectorAll('.social-icon').forEach(icon => {
-    icon.addEventListener('click', function(e) {
-        const type = this.dataset.type;
-        
-        // 对于 telegram 和 github，在新窗口打开
-        if (type === 'telegram' || type === 'github') {
-            e.preventDefault(); // 阻止默认行为
-            window.open(this.href, '_blank'); // 在新窗口打开链接
-            return;
-        }
-        
-        // 对于需要显示二维码的图标
-        e.preventDefault();
-        if (type === 'wechat' || type === 'qq' || type === 'douyin') {
-            const qrUrl = this.dataset.qr;
-            if (qrUrl) {
-                const modal = document.getElementById('qrModal');
-                const qrImage = document.getElementById('qrImage');
-                qrImage.src = qrUrl;
-                modal.style.display = 'block';
-            }
-        }
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.contact-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = this.getAttribute('data-id');
+            handleContact(id);
+        });
     });
 });
 
@@ -136,47 +128,36 @@ window.addEventListener('click', function(event) {
     }
 });
 
-// 添加新年祝福生成器代码
-const p1 = ['xīn', 'gōng', 'dà', 'wàn', 'nián', 'shēn', 'xīn', 'gōng'];
-const p2 = ['nián', 'xǐ', 'jí', 'shì', 'nián', 'tǐ', 'xiǎng', 'hè'];
-const p3 = ['kuài', 'fā', 'dà', 'rú', 'yǒu', 'jiàn', 'shì', 'xīn'];
-const p4 = ['lè', 'cái', 'lì', 'yì', 'yú', 'kāng', 'chéng', 'xǐ'];
-const phrasesC1 = ['新', '恭', '大', '萬', '年', '身', '心', '恭'];
-const phrasesC2 = ['年', '喜', '吉', '事', '年', '體', '想', '賀'];
-const phrasesC3 = ['快', '發', '大', '如', '有', '健', '事', '新'];
-const phrasesC4 = ['樂', '財', '利', '意', '餘', '康', '成', '禧'];
-const phrasesE = [
-    '(Happy new year)',
-    '(Congratulations on your prosperity)',
-    '(Great luck and prosperity)',
-    '(May 10,000 things go according to your wishes)',
-    '(Every year have more than you need)',
-    '(Wishing you good health)',
-    "(May all your heart's desires come true)",
-    '(Congratulations in the new year)',
-];
-
-function updatePhrase() {
-    const random = Math.random();
-    const index = Math.floor(random * p1.length);
-    
-    document.getElementById('pinyin1').textContent = p1[index];
-    document.getElementById('pinyin2').textContent = p2[index];
-    document.getElementById('pinyin3').textContent = p3[index];
-    document.getElementById('pinyin4').textContent = p4[index];
-    
-    document.getElementById('phraseChinese1').textContent = phrasesC1[index];
-    document.getElementById('phraseChinese2').textContent = phrasesC2[index];
-    document.getElementById('phraseChinese3').textContent = phrasesC3[index];
-    document.getElementById('phraseChinese4').textContent = phrasesC4[index];
-    
-    document.getElementById('phraseEnglish').textContent = phrasesE[index];
-}
-
-// 初始化新年祝福
+// 添加 GSAP 动画初始化
 document.addEventListener('DOMContentLoaded', () => {
-    updatePhrase();
-    document.getElementById('button').addEventListener('click', updatePhrase);
+    // 初始化 GSAP 动画
+    gsap.to("#bongo-cat", {
+        duration: 0.5,
+        opacity: 1,
+        y: 0,
+        ease: "power2.out"
+    });
+
+    const pawRight = document.querySelector('.paw-right');
+    const keyboardHand = document.querySelector('.keyboard-hand');
+    
+    // 初始化 GSAP 动画
+    gsap.to(pawRight, {
+        y: -20,
+        duration: 0.25,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut"
+    });
+    
+    gsap.to(keyboardHand, {
+        y: -20,
+        duration: 0.25,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut",
+        delay: 0.1
+    });
 });
 
 // 页面加载完成后执行
@@ -184,10 +165,10 @@ document.addEventListener('DOMContentLoaded', loadArticles);
 
 // 替换原有时钟函数
 let hrs = document.querySelector('#hrs');
-let sec = document.querySelector('#sec');
 let min = document.querySelector('#min');
+let sec = document.querySelector('#sec');
 
-setInterval(() => {
+function updateClockHands() {
     let day = new Date();
     let hh = day.getHours() * 30;
     let mm = day.getMinutes() * 6;
@@ -196,7 +177,10 @@ setInterval(() => {
     hrs.style.transform = `rotateZ(${hh + mm / 12}deg)`;
     min.style.transform = `rotateZ(${mm}deg)`;
     sec.style.transform = `rotateZ(${ss}deg)`;
-});
+
+    requestAnimationFrame(updateClockHands);
+}
+updateClockHands();
 
 // 数字时钟
 function updateClock() {
@@ -275,69 +259,107 @@ function handleContact(id) {
     switch(id) {
         case '1': // 微信
             showContactInfo('微信二维码');
-            showQRCode('http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png', '微信二维码');
+            showQRCode('https://blog.httpsguo.cn/wp-content/uploads/2025/02/WeChat.png', '微信二维码');
             break;
         case '2': // QQ
             showContactInfo('QQ二维码');
-            showQRCode('http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png', 'QQ二维码');
+            showQRCode('https://blog.httpsguo.cn/wp-content/uploads/2025/02/QQ.png', 'QQ二维码');
             break;
         case '3': // 抖音
             showContactInfo('抖音二维码');
-            showQRCode('http://blog.httpsguo.cn/wp-content/uploads/2024/10/cropped-11.png', '抖音二维码');
+            showQRCode('https://blog.httpsguo.cn/wp-content/uploads/2025/02/tiktok.png', '抖音二维码');
             break;
         case '4': // 邮箱
             showContactInfo('邮箱：httpsguo@163.com');
             break;
         case '5': // Telegram
             showContactInfo('正在跳转到 Telegram...');
-        window.open('https://t.me/httpsguo', '_blank');
+            window.open('https://t.me/httpsguo', '_blank');
             break;
         case '6': // GitHub
             showContactInfo('正在跳转到 GitHub...');
-        window.open('https://github.com/HttpsGuo', '_blank');
+            window.open('https://github.com/HttpsGuo', '_blank');
             break;
     }
 }
 
 // 修改二维码显示函数
 function showQRCode(qrUrl, title) {
-    // 移除已存在的二维码模态框
-    const existingModal = document.querySelector('.qr-modal');
-    if (existingModal) {
-        existingModal.remove();
+    const modal = document.getElementById('qrModal');
+    const qrImage = document.getElementById('qrImage');
+    const modalTitle = document.querySelector('#qrModal .modal-title');
+    
+    if (modal && qrImage) {
+        modalTitle.textContent = title;
+        qrImage.src = qrUrl;
+        modal.style.display = 'block';
+        
+        // 添加图片加载错误处理
+        qrImage.onerror = function() {
+            console.error('二维码图片加载失败:', qrUrl);
+            showContactInfo('二维码图片加载失败，请检查图片路径');
+        };
+        
+        // 添加图片加载成功处理
+        qrImage.onload = function() {
+            console.log('二维码图片加载成功:', qrUrl);
+        };
+    } else {
+        console.error('找不到二维码模态框或图片元素');
+        showContactInfo('二维码显示出错，请刷新页面重试');
     }
+}
 
-    const modal = document.createElement('div');
-    modal.className = 'qr-modal';
+// 确保关闭按钮事件监听器正确添加
+document.addEventListener('DOMContentLoaded', () => {
+    const closeBtn = document.querySelector('#qrModal .close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            document.getElementById('qrModal').style.display = 'none';
+        });
+    }
     
-    modal.innerHTML = `
-        <div class="qr-content">
-            <h3>${title}</h3>
-            <img src="${qrUrl}" alt="${title}">
-        </div>
-    `;
-    
-    // 将模态框添加到 body
-    document.body.appendChild(modal);
-    
-    // 显示模态框
-    requestAnimationFrame(() => {
-        modal.style.display = 'flex';
-    });
-    
-    // 点击背景关闭
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-        modal.style.display = 'none';
-        setTimeout(() => modal.remove(), 300);
+    // 点击模态框外部关闭
+    window.addEventListener('click', (event) => {
+        const modal = document.getElementById('qrModal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
         }
     });
-}
+});
 
 // 初始化联系方式
 document.addEventListener('DOMContentLoaded', () => {
     // 显示所有图标
     document.querySelectorAll('.bubble .icon').forEach(icon => {
         icon.style.opacity = '0.7';
+    });
+});
+
+// 返回顶部功能
+const backToTop = document.getElementById('backToTop');
+const mainNav = document.querySelector('.main-nav');
+let lastScrollTop = 0;
+
+// 监听滚动事件
+window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const navHeight = mainNav.offsetHeight;
+    
+    // 当滚动超过导航栏高度时显示按钮
+    if (scrollTop > navHeight) {
+        backToTop.classList.add('show');
+    } else {
+        backToTop.classList.remove('show');
+    }
+    
+    lastScrollTop = scrollTop;
+});
+
+// 点击返回顶部
+backToTop.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
 });

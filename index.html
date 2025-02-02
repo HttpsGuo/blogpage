@@ -83,9 +83,26 @@
         display: flex;
         gap: 2rem;
       }
+      /* 调整顶部间距 */
+      header {
+        padding: 1.5rem !important;
+        margin-bottom: 2rem !important;
+      }
+      .main-nav {
+        margin-top: 2rem !important;
+      }
+      .container {
+        margin-top: calc(4rem + 2rem) !important; /* header高度(4rem) + 期望间距(2rem) */
+      }
       @media (max-width: 768px) {
         .nav-links {
           flex-wrap: wrap;
+        }
+        .container {
+          margin-top: calc(3rem + 2rem) !important; /* header高度(3rem) + 期望间距(2rem) */
+        }
+        header {
+          padding: 1rem !important;
         }
       }
     </style>
@@ -106,12 +123,12 @@
 </head>
 <body>
     <!-- 页眉 -->
-    <header>
+    <header style="padding: 1.5rem; margin-bottom: 2rem;">
         <h1>HttpsGuo-郭先生的Blog</h1>
     </header>
 
     <!-- 主要内容区 -->
-    <div class="container">
+    <div class="container" style="margin-top: calc(4rem + 2rem);">
         <!-- 左侧边栏 -->
         <aside class="sidebar">
             <!-- 头像区域 -->
@@ -240,7 +257,7 @@
         <!-- 右侧主要内容 -->
         <main class="main-content">
             <!-- 导航栏 -->
-            <nav class="main-nav" role="navigation" aria-label="主导航">
+            <nav class="main-nav" style="margin-top: 2rem;" role="navigation" aria-label="主导航">
                 <ul>
                     <div class="nav-links">
                         <li><a href="https://www.httpsguo.cn" target="_blank" aria-label="首页">首页</a></li>
@@ -259,23 +276,25 @@
 
             <!-- 卡片栏目 -->
             <div class="card-section">
-                <div class="newyear-card">
-                    <table>
-                        <tr>
-                            <th class="pinyin" id="pinyin1">xīn</th>
-                            <th class="pinyin" id="pinyin2">nián</th>
-                            <th class="pinyin" id="pinyin3">kuài</th>
-                            <th class="pinyin" id="pinyin4">lè</th>
-                        </tr>
-                        <tr>
-                            <td id="phraseChinese1">新</td>
-                            <td id="phraseChinese2">年</td>
-                            <td id="phraseChinese3">快</td>
-                            <td id="phraseChinese4">樂</td>
-                        </tr>
-                    </table>
-                    <h2 id="phraseEnglish">(Happy new year)</h2>
-                    <button type="button" id="button"><p>换一个</p></button>
+                <div class="pl">
+                    <div class="pl__coin">
+                        <div class="pl__coin-flare"></div>
+                        <div class="pl__coin-flare"></div>
+                        <div class="pl__coin-flare"></div>
+                        <div class="pl__coin-flare"></div>
+                        <div class="pl__coin-layers">
+                            <div class="pl__coin-layer">
+                                <div class="pl__coin-inscription"></div>
+                            </div>
+                            <div class="pl__coin-layer"></div>
+                            <div class="pl__coin-layer"></div>
+                            <div class="pl__coin-layer"></div>
+                            <div class="pl__coin-layer">
+                                <div class="pl__coin-inscription"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pl__shadow"></div>
                 </div>
             </div>
 
@@ -310,23 +329,13 @@
                 <div class="links-container">
                     <a href="https://chongbuluo.com" class="friend-link" target="_blank">
                         <div class="link-item">
-                            <!-- 虫部落网站图标位置：
-                                 1. 图片大小建议：16x16px
-                                 2. 格式：PNG或ICO
-                                 3. 替换下方注释为实际图标
-                            -->
-                            <!-- <img src="网站图标地址" alt="虫部落" class="site-icon"> -->
+                            <img src="https://www.chongbuluo.com/favicon.ico" alt="虫部落" class="site-icon">
                             <span>虫部落</span>
                         </div>
                     </a>
                     <a href="https://linux.do" class="friend-link" target="_blank">
                         <div class="link-item">
-                            <!-- LINUX DO网站图标位置：
-                                 1. 图片大小建议：16x16px
-                                 2. 格式：PNG或ICO
-                                 3. 替换下方注释为实际图标
-                            -->
-                            <!-- <img src="网站图标地址" alt="LINUX DO" class="site-icon"> -->
+                            <img src="https://linux.do/uploads/default/optimized/3X/9/d/9dd49731091ce8656e94433a26a3ef36062b3994_2_32x32.png" alt="LINUX DO" class="site-icon">
                             <span>LINUX DO</span>
                         </div>
                     </a>
@@ -339,11 +348,16 @@
     <div id="qrModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
+            <h2 class="modal-title"></h2>
             <img id="qrImage" src="" alt="二维码">
         </div>
     </div>
 
     <!-- 统计代码位置2 -->
     <script src="/script.js" defer></script>
+
+    <div id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 </body>
 </html> 
